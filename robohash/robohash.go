@@ -1,3 +1,5 @@
+// Package robohash provides functions to create and generate URLS for various types of robohash images
+// from robohash.org.
 package robohash
 
 import (
@@ -27,15 +29,19 @@ type Robohash struct {
 	rType Type
 }
 
+// GetUrl returns the URL of a robohash image.
 func (r Robohash) GetUrl() string {
 	// Sprintf : think of it as string-print-format
 	return fmt.Sprintf("https://robohash.org/%s.png?set=set%d", r.name, r.rType.setNumber)
 }
 
+// String is an implementation of the fmt.Stringer interface.
 func (r Robohash) String() string {
 	return fmt.Sprintf("[%s] %s", r.rType.name, r.name)
 }
 
+// NewRobohash creates a new robohash of the given name and type (rType).
+// The name cannot be an empty string. rType should be one of the Type variables in this package.
 func NewRobohash(name string, rType Type) (Robohash, error){
 	if name == "" {
 		return Robohash{}, fmt.Errorf("Name cannot be an empty string!")
