@@ -18,6 +18,10 @@ type Type struct {
 	setNumber int
 }
 
+func (t Type) Name() string {
+	return t.name
+}
+
 type Robohash struct {
 	name string // can have spaces, but must not be empty
 	rType Type
