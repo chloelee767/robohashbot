@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"strconv"
+	"strings"
 
 	"github.com/chloelee767/robohashbot/robohash"
 
 	tgbotapi "gopkg.in/telegram-bot-api.v4"
 )
-
 
 func main() {
 	bot, botCreationErr := tgbotapi.NewBotAPI("1192566547:AAEQ_FH2mCvL2spwloOnAaMneaa7_ya_3f8")
@@ -24,15 +23,16 @@ func main() {
 		return
 	}
 
-	list :=  []robohash.Robohash{} // or make([]robohash.Robohash, 0)
+	list := []robohash.Robohash{} // or make([]robohash.Robohash, 0)
 
-	commandMap := map[string]command {
-		"add": addRobohash,
+	commandMap := map[string]command{
+		"add":    addRobohash,
 		"delete": deleteRobohash,
-		"list": listRobohashes,
-		"show": showRobohash,
+		"list":   listRobohashes,
+		"show":   showRobohash,
 		"": func(chatID int64, _ *[]robohash.Robohash, _ string) tgbotapi.Chattable {
-			return tgbotapi.NewMessage(chatID, "That's not a command!")},
+			return tgbotapi.NewMessage(chatID, "That's not a command!")
+		},
 	}
 
 	fmt.Println("Listening...")
@@ -57,14 +57,13 @@ type command func(int64, *[]robohash.Robohash, string) tgbotapi.Chattable
 
 func addRobohash(chatID int64, list *[]robohash.Robohash, args string) tgbotapi.Chattable {
 	correctSyntaxMsg := "To add a robohash, use /add TYPE NAME\nTYPE must be one of robot, monster, newRobot, cat or human"
-	nameToType := map[string]robohash.Type {
-		robohash.Robot.Name(): robohash.Robot,
-			robohash.Monster.Name(): robohash.Monster,
-			robohash.NewRobot.Name(): robohash.NewRobot,
-			robohash.Cat.Name(): robohash.Cat,
-			robohash.Human.Name(): robohash.Human,
-
-		}
+	nameToType := map[string]robohash.Type{
+		robohash.Robot.Name():    robohash.Robot,
+		robohash.Monster.Name():  robohash.Monster,
+		robohash.NewRobot.Name(): robohash.NewRobot,
+		robohash.Cat.Name():      robohash.Cat,
+		robohash.Human.Name():    robohash.Human,
+	}
 
 	split := strings.SplitN(args, " ", 2)
 	if len(split) < 2 {

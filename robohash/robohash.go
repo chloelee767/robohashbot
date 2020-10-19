@@ -8,15 +8,15 @@ import (
 
 // Valid Types for Robohashes
 var (
-	Robot = Type{"robot", 1}
-	Monster = Type{"monster", 2}
+	Robot    = Type{"robot", 1}
+	Monster  = Type{"monster", 2}
 	NewRobot = Type{"newRobot", 3}
-	Cat = Type{"cat", 4}
-	Human = Type{"human", 5}
+	Cat      = Type{"cat", 4}
+	Human    = Type{"human", 5}
 )
 
 type Type struct {
-	name string
+	name      string
 	setNumber int
 }
 
@@ -25,7 +25,7 @@ func (t Type) Name() string {
 }
 
 type Robohash struct {
-	name string // can have spaces, but must not be empty
+	name  string // can have spaces, but must not be empty
 	rType Type
 }
 
@@ -42,7 +42,7 @@ func (r Robohash) String() string {
 
 // NewRobohash creates a new robohash of the given name and type (rType).
 // The name cannot be an empty string. rType should be one of the Type variables in this package.
-func NewRobohash(name string, rType Type) (Robohash, error){
+func NewRobohash(name string, rType Type) (Robohash, error) {
 	if name == "" {
 		return Robohash{}, fmt.Errorf("Name cannot be an empty string!")
 	}
